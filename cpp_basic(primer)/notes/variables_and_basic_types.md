@@ -1,9 +1,9 @@
-# CHPT2 变量和基本类型
+# 变量和基本类型
 
 "一些语言，如Smalltalk和Python，在程序运行时检查数据类型；与之相反，C++是一种静态数据类型语言，它的类型检查发生在编译时。"
 "C++语言主要的一个设计目标就是让程序员自定义的数据类型像内置类型一样好用。"
 
-## 2.1 基本内置类型
+## 基本内置类型
 
 C++定义了一套包括算术类型(arithmetic type)和空类型(void)在内的基本数据类型。
 **NOTE** 空类型不对应具体的值，仅用于一些特殊的场合，例如最常见的是，当函数不返回任何值时使用空类型作为返回类型。
@@ -33,7 +33,7 @@ C++定义了一套包括算术类型(arithmetic type)和空类型(void)在内的
 3. 如果需要使用一个不大的整数，那么明确指定它的类型是signed char或unsigned char。
 4. 执行浮点数运算选用double。因为float通常精度不够而且float和double的计算代价相差无几(?)。事实上，对于某些机器来说，双精度运算甚至比单精度还快。long double一般没有必要，而且消耗不容忽视。
 
-### 2.1.2 类型转换
+### 类型转换
 
 > example: exercise2-3.cpp (!)
 
@@ -118,9 +118,9 @@ example:
 | f or F |    float    |
 | l or L | long double |
 
-## 2.2 变量
+## 变量
 
-### 2.2.1 变量定义
+### 变量定义
 
 首先**类型说明符**，随后一个或多个变量名列表，以逗号分隔，以分号结束。
 
@@ -140,7 +140,7 @@ string是一种表示可边长字符序列的数据类型。
 如果时内置类型的变量未被显式初始化。它的值由定义的位置决定。定义于任何函数体之外的变量被初始化为0.
 **NOTE**： 定义在函数体内部的内置类型将不被初始化。一个未被初始化的内置类型变量的值是未定义的，若试图拷贝或者以其他形式访问此类值将引发错误。
 
-### 2.2.2 变量声明和定义的关系
+### 变量声明和定义的关系
 
 为了支持分离式编译，C++将声明和定义区分开来
 
@@ -155,13 +155,13 @@ string是一种表示可边长字符序列的数据类型。
 **NOTE**： 变量能且只能被定义一次，但是可以被多次声明。 (????)
            如果要在多个文件中使用同一个变量，就必须将声明和定义分离。此时，变量的定义必须出现在且只能出现在一个文件中，而其他用到该变量的文件必须对其进行声明，却绝对不能重复定义。
 
-### 2.2.3 标识符
+### 标识符
 
 标识符由字母、数字、下划线组成，必须以字母或下划线开头，不能连续出现两个下划线，不能下划线紧连大写字母开头。定义在函数体外的标识符不能以下划线开头。
 
 **NOTE**： 变量名一般用小写字母，类名以大写字母开头。同一种命名规则最好坚持使用。
 
-### 2.2.4 名字的作用域 (scope)
+### 名字的作用域 (scope)
 
 1. 全局作用域(global scope)。定义在函数体外的名字拥有(如main)，在整个程序的范围内都可以使用。
 2. 块作用域(block scope)。定义在函数(如main)或语句(如for)内，出了这个块就无法访问了。
@@ -174,9 +174,9 @@ string是一种表示可边长字符序列的数据类型。
 
 **NOTE**当内层变量名字与外层相同时，内层被覆盖。想访问外层变量时，可以用**作用域操作符**来覆盖默认的作用域规则，因为全局作用域本身并没有名字，座椅当作用域操作符的左侧为空时，向全局作用域发出请求获取作用域操作符右侧名字对应的变量。
 
-## 2.3 复合类型
+## 复合类型
 
-### 2.3.1 引用 (???)
+### 引用 (???)
 
 引用(reference)为对象起了另外一个名字，引用类型引用(refers to)另外一种类型。通过将声明符写成&d的形式来定于引用类型，其中d是声明的变量名:
 example: 
@@ -189,7 +189,15 @@ example:
 
 **NOTE**： 引用即别名。
 
-### 2.3.2 指针 (!?)
+**NOTE**：关于引用和指针：
+1. A pointer can be re-assigned any number of times while a reference cannot be reassigned after binfing. 
+2. Pointers can point nowhere (NULL), whereas a reference always refers to an abject. 
+3. You can't take the address of a reference like you can with pointers.
+4. There's no "reference arithmetic" (but you can take the address of an object pointed by a reference and do pointer arithmetic on it as in &obj+5).
+5. A pointer and a reference both use the same amount of memory.
+
+
+### 指针
 
 > example: exercise2_18.cpp
 
@@ -210,7 +218,7 @@ example: int ival = 42;
 指针的值：
 1. 指向一个对象
 2. 指向紧邻对象所占空间的下一个位置(?)
-3. 空指针，没有任何对象
+3. 空指针(null pointer)，没有任何对象
 4. 无效指针
    
 **NOTE**： 访问无效指针的值会引发错误。试图访问2、3型指针(假定的)对象的行为也不被允许
@@ -229,10 +237,11 @@ example:
         cout << *p; //输出0
 
 生成空指针(null pointer)
-int *p1 = nullptr;        //最直接的方法，也是最建议的方法
-int *p2 = 0;
-//需要先#include cstdlib
-int *p3 = NULL;
+
+    int *p1 = nullptr;        //最直接的方法，也是最建议的方法
+    int *p2 = 0;
+    //需要先#include cstdlib
+    int *p3 = NULL;
 
 **NOTE**： 使用未经初始化的指针式引发运行时错误的一大原因。所以建议初始化所有指针，并且在可能的情况下，尽量等定义了对象后再定义指向它的指针。如果实在不清楚指针一个指向何处，就把它初始化为nullptr或者0。
 
@@ -240,11 +249,12 @@ int *p3 = NULL;
 
 void*是一种特殊的指针类型，可用于存放任意对象的地址。然而，我们对该地址中到底是个什么类型的对象并不了解。
 example: 
-double obj = 3.14, *pd = &obj;
-void *pv = &obj;                //obj可以是任意类型的对象
-pv = pd;                        //pv可以存放任意类型的指针
 
-void指针的功能：拿它和别的指针比较、作为函数的输入或输出，或者赋给另一个void指针
+    double obj = 3.14, *pd = &obj;
+    void *pv = &obj;                //obj可以是任意类型的对象
+    pv = pd;                        //pv可以存放任意类型的指针
+
+void指针的功能：拿它和别的指针比较、作为函数的输入或输出，或者赋给另一个void指针 (?)
 
 ### 2.3.3 理解符合类型的声明
 
@@ -257,7 +267,7 @@ int **ppi = & pi;
 
 存在对指针的引用
 
-## 2.4 const 限定符
+## const 限定符
 
 example:
     
@@ -275,6 +285,33 @@ const对象一旦创建后其值就不能再改变
 
 ### 2.4.4 constexpr和常量表达式
 
+常量表达式(const expression)是指不会改变并且在编译过程就能得到计算结果的表达式。
+
+#### constexpr变量
+
+在一个复杂系统中，很难(几乎肯定不能)分辨一个初始值到底是不是常量表达式。
+
+C++11新标准规定，允许将变量声明为constexpr类型以便由编译器来验证变量的值是否是一个常量表达式。声明为constexpr的变量一定是一个常量，而且必须用常量表达式初始化：
+
+    constexpr int mf = 20;
+    constexpr int limit = mf + 1;
+    constexpr int sz = size();     //只有当size是一个constexpr函数时才是正确的
+
+**NOTE**：一般来说，如果你认定变量是一个常量表达式，那就把它声明成constexpr类型。
+
+#### 字面值类型
+
+常量表达式的值需要在编译时就得到计算，因此对声明constexpr时用到的类型必须有所限制。因为这些类型一般比较简单，就被称为“字面值类型”(literal type)
+
+算术类型、引用和指针都属于字面值类型。自定义类、IO库、string类型则不属于字面值类型，也就不能被定义成constexpr。
+
+尽管指针和引用都能定义成constexpr，但它们的初始值却受到严格限制。一个constexpr指针的初始值必须是nullptr或0，或存储于某个固定地址中的对象。
+
+**NOTE**：在constexpr声明中如果定义了一个指针，限定符constexpr仅对指针有效，与指针所指的对象无关：
+
+    const int *p = nullptr;      //p是一个指向整型常量的指针
+    constexpr int *q = nullptr;  //q是一个指向整数的常量指针
+
 ## 2.5 处理类型
 
 ### 2.5.1 类型别名
@@ -283,30 +320,157 @@ const对象一旦创建后其值就不能再改变
 
 ### 2.5.3 decltype类型指示符
 
-## 2.6 自定义数据结构
 
-### 2.6.1 定义Sales_data类型
 
-> example: dataStructIntro.cpp
 
-类以关键字struct开始，紧跟着类名和类体(类体部分可以为空(??))。类体由花括号包围(**右花括号要有分号分隔！！！**)形成一个新的作用域。
 
-**另两种写法**：
-1. 
+
+## 标准库类型string
+
+使用string类型必须首先包含string头文件。作为标准库的一部分，string定义在命名空间std中。
+example:
+
+    #include <string>
+    using std::string;
+
+### 命名空间的using声明
+
+有了using声明就无须专门的前缀(形容命名空间::)也能使用所需的名字了。用了using的语句，就可以直接访问命名空间中的名字:
+example: 
     
-    struct Sales_data { ... } accum, trans, *salesptr;
-2. 
-    
-    struct Sales_data { ... };
-    Sales_data accum, trans, *salesptr;
-    //与上一种相同，可能更好
+    #include <iostream>
+    using std::cin;
+    int main()
+    {
+        int i;
+        cin >> i;         //正确
+        cout << i;        //错误
+        std::cout << i;   //正确
+        return 0;
+    }
 
-#### 类的数据成员
+每个名字都需要独立的using声明，而头文件不应包含using声明
 
-可提供一个类内初始值
 
-### 2.6.2 使用类
+### 定义和初始化string对象
 
-### 2.6.3 编写自己的头文件
+example:
 
-#### 预处理器概述 (???)
+    string s1;           //空字符串(不需要初始化字符数组的大小，这一点和C不一样)
+    string s2 = s1;      //s2是s1的副本(拷贝初始化)
+    string s2(s1);       //等价于上(直接初始化)
+    string s3 = "hiya";  //s3是该字符串字面值的副本
+    string s3("hiya");   //等价于上
+    string s4(10,'c');   //cccccccccc
+
+### string对象上的操作
+
+string的操作
+|   operation    |                   意义                    |
+| :------------: | :---------------------------------------: |
+|    os << s     |       将s写到输出流os中，返回os(?)        |
+|    is >> s     | 从is中读取字符串赋给s，以空白分隔，返回is |
+| getline(is, s) |     从is中读取一行赋给s，返回is的状态     |
+|   s.empty()    |       s为空返回true，否则返回false        |
+|    s.size()    |             返回s中字符的个数             |
+|      s[n]      |       返回s中第n个字符的引用，从0起       |
+|     s1+s2      |          返回s1和s2连接后的结果           |
+|     s1=s2      |       用s2的副本代替s1中原来的字符        |
+|     s1==s2     |                   相等                    |
+|     s1!=s2     |                  不相等                   |
+|  <, <=, >, >=  |                  不等号                   |
+(以上的is,os分别是istream和ostream的缩写)
+
+> example: exercise_getline.cpp
+
+
+#### string::size_type类型 (????)
+
+size()函数返回的是一个string::size_type类型的值
+
+在C++11新标准中，允许编译器通过auto或者decltype来推断变量的类型。example:
+
+    auto len = line.size();  //len的类型是string::size_type
+
+**NOTE**：如果一条表达式中已经有了size()函数就不要再使用int了，这样可以避免混用int和unsigned可能带来的问题。例如，假设n是一个具有负值的int，则表达式s.size() < n的判断结果几乎肯定是true，因为负值n会自动地转换成一个比较大的无符号值
+
+### 处理string对象中的字符
+
+cctype头文件：在C语言中，cctype头文件就是ctype.h头文件，只不过在C++中去掉了.h的后缀并在前面加上了c的前缀
+
+cctype头文件中的函数
+|  function   |                        meaning                        |
+| :---------: | :---------------------------------------------------: |
+| isalnum(c)  |                 当c是字母或数字时为真                 |
+| isalpha(c)  |                    当c是字母时为真                    |
+| iscntrl(c)  |                  当c是控制字符时为真                  |
+| isdigit(c)  |                    当c是数字时为真                    |
+| isxdigit(c) |                当c是十六进制数字时为真                |
+| isgraph(c)  |               当c不是空格但可打印时为真               |
+| islower(c)  |                  当c是小写字母时为真                  |
+| isupper(c)  |                  当c是大写字母式为真                  |
+| isprint(c)  |     当c是可打印字符时为真(c是空格或c具有可视形式)     |
+| ispunct(c)  |                  当c是标点符号时为真                  |
+| isspace(c)  | 空白时真(空格、横/纵向制表符、回车符、换行符、进纸符) |
+| tolower(c)  |                  输出对应的小写字母                   |
+| toupper(c)  |                  输出对应的大写字母                   |
+
+#### 基于范围的for语句
+
+可以用for语句遍历给定序列(比如string)中的每一个元素 (貌似C里面不能这么写)
+
+example:
+
+    string s("Hello World!!!");
+    decltype(s.size()) punct_cnt = 0;
+    //punct_cnt的类型和s.size的返回类型一样
+    for (auto c : s)
+        if (ispunct(c))
+            ++punct_cnt;
+    cout << punct_cnt << endl;
+
+#### 使用范围for语句改变字符串中的字符(!!!!!!)
+
+要改变string对象中字符的值，必须把循环变量定义成引用类型。引用只是给定对象的一个别名，因此当使用引用作为循环控制变量时，这个变量实际上被依次绑定到了序列的每个元素上。
+
+> example: 
+> 
+> range_for.cpp; 
+> 
+> exercise_string_empty_size.cpp
+
+    string s("Hello World!!!");
+    for (auto &c : s)
+        c = toupper(c);
+    cout << s << endl;
+
+### 只处理一部分字符
+
+要想访问string对象中的单个字符有两种方式：一种是使用下标，另外一种是使用迭代器。
+
+#### 下标运算符
+
+下标运算符[]接收的输入参数是string::size_type类型的值，这个参数表示要访问的字符的位置，返回值是该位置上字符的引用。(从0计起)
+
+**NOTE**： string对象的下标必须大于等于0而小于s.size()，使用超出此范围的下标将引发不可预知的结果，使用下标访问空string也会。所以，**在访问指定字符之前，首先检查s是否为空**
+
+使用下标执行迭代，example:
+
+    for (decltype(s.size()) index = 0; index != s.size() && !isspace(s[index]);index++)
+        s[index] = toupeer(s[index]);
+    //依次处理s中的字符直至处理完全部字符或者遇到一个空白
+
+当输入: some string的时候，程序将输出：
+
+    SOME string
+
+#### 迭代器
+
+严格来说，string对象不属于容器类型，但是string支持很多与容器类型类似的操作。比如迭代器和下标操作。
+
+
+### C风格字符串
+
+**NOTE**：尽管C++支持C风格字符串，但在C++程序中最好还是不要使用它们。因为C风格字符串不仅使用起来不太方便，而且极易引发程序漏洞，是诸多安全问题的根本原因。
+
+**NOTE**：对大多数应用来说，使用标准库string要比使用C风格字符串更安全、高效。
