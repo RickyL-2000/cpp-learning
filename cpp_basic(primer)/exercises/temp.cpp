@@ -1,8 +1,12 @@
 #include <iostream>
 int main()
 {
-    int i = 100, sum = 0; 
-    for (int i = 0; i != 10; ++i)
-        sum += i;
-    std::cout << i << " " << sum << std::endl;
+    int ia[3][4] = {};
+    for (auto &row : ia) {
+        for (auto col : row)
+            std::cout << col << ' ';
+        std::cout << "\n";
+    }
+    std::cout << std::endl;
+    return 0;
 }

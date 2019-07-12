@@ -19,7 +19,7 @@
     auto mid = text.begin() + (end - beg)/2;
     while (mid != end && *mid != sought) {
         if (sought < *mid)
-            end = mid;
+            end = mid;      //为什么不是mid-1?
         else
             beg = mid + 1;
         mid = beg + (end - beg)/2;

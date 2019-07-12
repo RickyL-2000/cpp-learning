@@ -187,7 +187,7 @@ example:
 
 **NOTE**： 定义引用时，程序把引用和它的初始值绑定(bind)在一起，而不是将初始值拷贝给引用。一旦初始化完成，引用将和它的初始值对象一直绑定在一起。因为无法令引用重新绑定到另外一个对象，因此引用必须初始化。
 
-**NOTE**： 引用即别名。
+**NOTE**： **引用即别名。**
 
 **NOTE**：关于引用和指针：
 1. A pointer can be re-assigned any number of times while a reference cannot be reassigned after binfing. 
@@ -201,17 +201,22 @@ example:
 
 > example: exercise2_18.cpp
 
-指针(pointer)式“指向另一种类型的符合类型。
+指针(pointer)是“指向另一种类型的符合类型。
 1. 指针本身就是一个对象，允许对指针赋值和拷贝，而且在指针的生命周期内它可以先后指向几个不同的对象。
 2. 指针无需在定义时赋初值。
    
 定义指针类型的方法将声明符写成*d的形式，其中d是变量名。
-example: int *ip1, *ip2;  //ip1和ip2都是指向int型对象的指针
-         double dp, *dp2;  //dp2是指向double型对象的指针，dp是double型对象
+example: 
+
+    int *ip1, *ip2;  //ip1和ip2都是指向int型对象的指针
+    double dp, *dp2;  //dp2是指向double型对象的指针，dp是double型对象
+
 
 指针存放某个对象的地址，要想获取该地址，需要使用**取地址符(&)**
-example: int ival = 42;
-         int *p = &ival; //p存放ival的地址，或者p是指向ival的指针
+example: 
+
+    int ival = 42;
+    int *p = &ival; //p存放ival的地址，或者p是指向ival的指针
 
 **NOTE**： 因为在声明语句中指针的类型实际上被用于指定它所指向对象的类型，所以二者必须匹配。
 
@@ -474,3 +479,9 @@ example:
 **NOTE**：尽管C++支持C风格字符串，但在C++程序中最好还是不要使用它们。因为C风格字符串不仅使用起来不太方便，而且极易引发程序漏洞，是诸多安全问题的根本原因。
 
 **NOTE**：对大多数应用来说，使用标准库string要比使用C风格字符串更安全、高效。
+
+### 与旧代码的接口
+
+很多C++程序在标准库出现之前就已经写成了，它们肯定没有用到string和vector类型。而且，有一些C++程序实际上是与C语言或其他语言的接口程序，当然也无法使用C++标准库。
+
+C++专门提供了一组功能来与那些充满了数组和/或C风格字符串的代码相衔接。

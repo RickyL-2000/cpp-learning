@@ -8,9 +8,11 @@
 
 插入排序的算法设计技术使用了**增量**的方法。
 
+> example: insertionSorting.cpp
+
 在插入排序的插入步骤中，需要O(n)的时间才能把选取的数据插入到合适的位置，因为经典的插入排序是遍历整个已排序的数组的。然而，可以使用二分查找(binary searching)的思想把这一时间缩短至O(ln(n))。
 
-> example: exercise2_3_6.c
+> example: binaryInsertionSorting.cpp
 
 ↑ 这是我自己想出来的算法。其中binarySearch函数就是用来代替原来遍历的算法的。然而，在本题中二分查找可能是找不到原值的(是插值)，这就导致边界条件可能会很复杂...或者只有我觉得很复杂...所以我又去学习了很多其他人的算法：
 
