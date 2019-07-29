@@ -530,3 +530,55 @@ example:
         cout << endl;
     }
     /* 将类型“4个整数组成的数组”命名为int_array，用类型名int_array定义外层循环的控制变量
+
+
+## algorithm
+
+C++ 中这些数据结构全部有标准模板库，存放在头文件<algorithm>中
+
+### heap
+
+Heap data structure can be implemented in a range using STL which allows faster input into heap and retrieval of a number always results in the largest number i.e. largest number of the remaining numbers is popped out each time. Other numbers of the heap are arranged depending upon the implementation.
+
+### heap 操作
+
+1. make_heap()  
+   used to convert a range (iterator) in a container to a heap (in situ exchange)
+   **NOTE**: excluding upper limit, i.e. make_heap[ v1.begin(), v1.end() )
+
+        vector<int> v1 = {20, 30, 40, 25, 15};
+        make_heap(v1.begin(), v1.end());
+
+2. front()
+   displays the first element of heap which is the maximum number
+
+        root = v1.front();
+
+3. push_heap()
+   insert elements into heap. New element is placed appropriately in the heap. (used to reorder elements)
+   (it's much like make_heap())
+
+        v1.push_back(50);
+        push_heap(v1.begin(), v1.end());
+
+4. pop_heap()
+   used to delete the maximum element of the heap. The heap elements are reorganised accordingly after this operation. The deleted element will be placed in the back of vector.
+
+        pop_heap(v1.begin(), v1.end());
+        v1.pop_back();
+
+5. sort_heap()
+   used to sort the heap. After this operation, the container is **no longer a heap.** (from small to large)
+
+        sort_heap(v1.begin(), v1.end());
+
+6. is_heap()
+   used to check whether the container is heap or not. Generally, in most implementations, the **reverse sorted container** is considered as heap.
+
+    while (is_heap(v1.begin(), v1.end())) {/*...*/}
+
+7. is_heap_until()
+   returns the iterator to the position till the container is the heap. 
+
+        auto it = is_heap_until(v1.begin(), v1.end());
+        // this *it is not included in the heap

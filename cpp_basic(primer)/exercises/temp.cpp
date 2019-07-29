@@ -1,12 +1,11 @@
 #include <iostream>
+#include <vector>
+using namespace std;
 int main()
 {
-    int ia[3][4] = {};
-    for (auto &row : ia) {
-        for (auto col : row)
-            std::cout << col << ' ';
-        std::cout << "\n";
+    vector<int> nums(10,1);
+    for (auto i = nums.begin(); i != nums.end(); ++i) {
+        cout << *i << endl;
     }
-    std::cout << std::endl;
     return 0;
 }

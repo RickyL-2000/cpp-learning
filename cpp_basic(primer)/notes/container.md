@@ -70,6 +70,7 @@
 2. 非顺序访问容器中元素的代价
 
 顺序容器类型
+
 |  container   |                        clarification                         |
 | :----------: | :----------------------------------------------------------: |
 |    vector    | 可变大小数组。支持快速随机访问。除尾部外插入删除元素可能很慢 |
@@ -118,6 +119,7 @@
 每个容器类型都定义了一个默认构造函数。除array之外，其他容器的默认构造函数都会创建一个指定类型的空容器，且都可以接受指定容器大小和元素初始值的参数。
 
 容器定义和初始化
+
 |    statements    |                          meanings                           |
 | :--------------: | :---------------------------------------------------------: |
 |       C c;       |   默认构造函数，构造空容器(若是array，则按默认方式初始化)   |
@@ -148,6 +150,7 @@ swap操作交换两个相同类型容器的内容。
 #### 向顺序容器添加元素
 
 添加元素的操作(array不支持)
+
 |      operations       |                           meanings                            |
 | :-------------------: | :-----------------------------------------------------------: |
 |    c.push_back(t)     |                 在c的尾部创建一个值为t的元素                  |
@@ -168,6 +171,7 @@ swap操作交换两个相同类型容器的内容。
 #### 访问元素
 
 在顺序容器中访问元素的操作
+
 | operations |          meanings          |
 | :--------: | :------------------------: |
 |  c.back()  |    返回c中尾元素的引用     |
@@ -183,6 +187,7 @@ swap操作交换两个相同类型容器的内容。
 #### 删除元素
 
 顺序容器的删除操作
+
 |  operations   |                           meanings                            |
 | :-----------: | :-----------------------------------------------------------: |
 | c.pop_back()  |                         删除c中尾元素                         |
@@ -196,6 +201,7 @@ swap操作交换两个相同类型容器的内容。
 #### 改变容器大小
 
 顺序容器大小操作（不适用于array）
+
 |  operations   |            meanings             |
 | :-----------: | :-----------------------------: |
 |  c.resize(n)  |      调整c的大小为n个元素       |
@@ -209,6 +215,7 @@ swap操作交换两个相同类型容器的内容。
 vector和string类型提供了一些成员函数，允许我们与它的实现中内存分配部分互动
 
 容器大小管理操作
+
 |    operations     |                 meanings                  |
 | :---------------: | :---------------------------------------: |
 | c.shrink_to_fit() |   请将capacity()减少为与size()相同大小    |
@@ -298,6 +305,8 @@ C++语言既有类模板(class template)，也有函数模板，其中vector是�
 |    v1 != v2     |         不同          |
 |  <. <=, >, >=   |  以字典顺序进行比较   |
 | v.push_back(t)  |    在尾端添加一个t    |
+|    v.front()    |    返回第一个元素     |
+|    v.back()     |   返回最后一个元素    |
 
 
 * 添加元素 push_back
@@ -431,6 +440,7 @@ begin和end返回的具体类型由对象是否是常量决定，如果对象是
 ##### 使用迭代器运算
 
 **vector和string迭代器支持的运算**
+
 |   operation   |             meaning              |
 | :-----------: | :------------------------------: |
 |   iter + n    |      指向容器内的某一个元素      |
@@ -467,7 +477,8 @@ begin和end返回的具体类型由对象是否是常量决定，如果对象是
 关联容器都支持本md开始时的容器操作，除了顺序容器的位置相关的操作。
 
 关联容器类型
-1. 按关键字有序保存元素
+一， 按关键字有序保存元素
+   
 | containers |       clarifications        |
 | :--------: | :-------------------------: |
 |    map     |  关联数组：保存key-value对  |
@@ -475,7 +486,11 @@ begin和end返回的具体类型由对象是否是常量决定，如果对象是
 |  multimap  |    关键字可重复出现的map    |
 |  multiset  |    关键字可重复出现的set    |
 
-2. 无序集合
+**NOTE**：如果一个multimap或multiset中有多个元素具有给定关键字，则这些元素在容器中会相邻存储
+
+
+二， 无序集合
+   
 |     containers     |   clarifications    |
 | :----------------: | :-----------------: |
 |   unordered_map    | 用散列函数组织的map |
@@ -486,6 +501,7 @@ begin和end返回的具体类型由对象是否是常量决定，如果对象是
 类型map和multimap定义在头文件< map >中； 
 set和multiset定义在头文件<set>中；
 无序容器则定义在头文件unordered_map和unordered_set中。
+
 
 
 ### 定义关联容器
@@ -537,8 +553,70 @@ pair是定义在头文件utility中的标准库类型
 
     pair<string, string> author{"James", "Joyce"};
 
+与其他标准库类型不同，pair的数据成员是public的。两个成员分别命名为first和second。example:
 
-### 使用关联容器
+    cout << w.first << " occurs " << w.second << ((w.second > 1) ? " times" : " time") << endl;
+
+**NOTE**: first和second成员没有括号！
+
+
+##### pair上的操作
+
+> example: exersize11_13.cpp
+
+|        operations         |                          meanings                          |
+| :-----------------------: | :--------------------------------------------------------: |
+|       pair<T1, T2>        |                          值初始化                          |
+|  pair<T1, T2> p(v1, v2)   |              first和second分别用v1和v2初始化               |
+| pair<T1, T2> p = {v1, v2} |                            同上                            |
+|     make_pair(v1, v2)     |     返回一个用v1和v2初始化的pair。pair的类型从v中推断      |
+|          p.first          |              返回p的名为first的(公有)数据成员              |
+|         p.second          |                           second                           |
+|        p1 relop p2        | 关系运算符按字典定义：p1.first < p2.first当p1 < p2时为true |
+|         p1 == p2          |             当first和second成员分别相等时相等              |
+|         p1 != p2          |                            同上                            |
+
+##### 创建pair对象的函数
+
+一个函数需要返回一个pair，可以用花括号包围的初始化器来返回pair：
+
+    pair<string, int>                             //？？？？？？这是什么操作？
+    process(vector<string> &v) {
+        //处理v
+        if (!v.empty())
+            return {v.back(), v.back().size()};  //列表初始化
+        else
+            return pair<string, int>();   //隐式构造返回值
+    }
+
+在较早的C++版本中，不允许用花括号包围的初始化器来返回pair这种类型的对象，必须显式地构造返回值：
+
+    if (!v.empty())
+        return pair<string, int>(v.back(), v.back().size());
+
+还可以用make_pair来生成pair对象：
+
+    if (!v.empty())
+        return make_pair(v.back(), v.back().size());
+
+
+
+### 关联容器操作
+
+关联容器还定义了以下类型：
+
+|    types    |                          clarifications                          |
+| :---------: | :--------------------------------------------------------------: |
+|  key_type   |                      此容器类型的关键字类型                      |
+| mapped_type |                每个关键字关联的类型，只适用于map                 |
+| value_type  | 对set,与key_type相同；对map，为pair<const key_type, mapped_type> |
+
+与顺序容器一样，我们使用作用域运算符来提取一个类型的成员。example:
+
+    map<string, int>::key_type key;
+
+
+
 
 example: 用map实现单词计数程序
 
@@ -562,3 +640,305 @@ example: 用set实现忽略特定单词程序
     }
 
 find()函数返回一个迭代器。如果给定关键字在set中，迭代器指向该关键字。否则，find()返回尾后迭代器。
+
+
+#### 关联容器迭代器
+
+当解引用一个关联容器迭代器时，我们会得到一个类型为容器的value_type的值的引用。对map而言，value_type是一个pair类型，其first成员保存const的关键字，second成员保存值。example:
+
+    auto map_it = word_count.begin(); //map_it指向一个pair
+    cout << map_it->first;
+    cout << " " << map_it->second;
+    map_it->first = "new key";  //错误，关键字是const的，无法修改
+    ++map_it->second;           //正确，可以改变值
+
+**NOTE**：一个map的value_type是一个pair，可以改变pair的值，不能改变关键字成员的值。
+
+
+**NOTE**：set的迭代器是const的，尽管set类型同时定义了iterator和const_iterator类型。两种类型只允许只读访问set中的元素。
+
+
+##### 遍历关联容器
+
+有顺序的关联容器可以被遍历。example:
+
+    auto map_it = word_count.cbegin();
+    while (map_it != word_count.cend()) {
+        cout << map_it->first << " occurs " << map_it->second << " times" << endl;
+    ++map_it;
+    }
+
+**NOTE**：本程序是按字典顺序排列的。当使用一个迭代器遍历一个map、multimap、set或multiset时，迭代器按关键字升序遍历元素。
+
+
+##### 关联容器和算法
+
+通常不对关联容器使用泛型算法。关键字是const这一特性意味着不能将关联容器传递给修改或重排容器元素的算法，因为这类算法需要向元素写入值。
+
+
+
+#### 添加元素
+
+* c.insert(v)  // v是value_type类型的对象
+
+关联容器的insert成员向容器中添加一个元素或一个元素范围。
+
+由于map和set包含不重复的关键字，因此插入一个以存在的元素对容器没有任何影响：
+
+    vector<int> ivec = {2,4,6,,8,2,4,6,8};
+    set<int> set2;
+    set2.insert(ivec.cbegin(), ivec.cend());  // 迭代器范围插入
+    set2.insert({1,3,5,7,1,3,5,7});           // 列表插入
+
+**NOTE**；insert有两个版本，分别接受一对迭代器，或是一个初始化器列表，这两个版本的行为类似对应的构造函数：
+
+    set.insert(b, e);
+    set.insert({...});
+
+
+* c.emplace(args)   //args用来构造一个元素
+
+对于map和set，只有当元素的关键字不在c中时才插入(或构造)元素。函数返回一个pair，包含一个迭代器，指向具有指定关键字的元素(???)，以及一个指示插入是否成功的bool值。
+
+
+* c.insert(p, v) & c.emplace(p, args)
+
+类似insert(v) & emplace(args)，但将迭代器p作为一个提示，指出从哪里开始搜索新元素应该存储的位置。返回一个迭代器，指向具有给定关键字的元素。
+
+
+##### 向 map 添加元素
+
+必须记住元素类型是pair。example:
+
+    word_count.insert({word, 1});
+    word_count.insert(make_pair(word, 1));
+    word_count.insert(pair<string, size_t>(word, 1));
+    word_count.insert(map<string, size_t>::value_type(word, 1));
+    // 一个比一个繁琐
+
+
+##### 检测 insert 的返回值
+
+insert(or emplace)返回的值的类型依赖于容器类型和参数。
+
+一：对于不包含重复关键字的容器，添加单一元素的insert和emplace版本返回一个pair，表明插入操作是否成功。pair的first成员是一个迭代器，指向具有给定关键字的元素；second成员是一个bool值，指出插入是否成功。
+
+如果关键字已在容器中，则insert什么事情也不做，且返回值中的fool部分为false，否则为true。
+
+example: 重写单词计数程序
+
+    map<string,size_t> word_count;
+    string word;
+    while (cin >> word) {
+        auto ret = word_count.insert({word,1});
+        if (!ret.second)
+            ++ret.first->second;  // 等价于：++((ret.first)->second);
+    }
+
+
+二：对于向multiset或multimap添加元素，容器中的关键字不必唯一，在这些类型上调用insert总会插入一个元素。example:
+
+    //建立一个作者到他所著的每个书籍的题目的映射
+    multimap<string, string> authors;
+    authors.insert({"Barth, John". "Sot-Weed Factor"});
+    authors.insert({"Barth, John", "Lost in the Funhouse"});
+    //对于添加的第二个元素，关键字也是Barth, John。
+
+对允许重复关键字的容器，接受单个元素的insert操作返回一个指向新元素的迭代器。这里无需返回一个bool值，因为insert总是向这类容器中加入一个新元素。
+
+
+
+#### 删除元素
+
+关联容器定义了三个版本的 erase。与顺序容器一样，我们可以通过传递给erase一个迭代器或一个迭代器对来删除一个元素或者一个元素范围。这两个版本的erase与对应的顺序容器的操作非常相似：指定的元素被删除，函数返回void。
+
+|  operations   |                           meanings                            |
+| :-----------: | :-----------------------------------------------------------: |
+| c.pop_back()  |                         删除c中尾元素                         |
+| c.pop_front() |                         删除c中首元素                         |
+|  c.erase(p)   | 删除迭代器p所制定的元素，返回一个指向被删元素之后元素的迭代器 |
+| c.erase(b,e)  | 删除迭代器b和e所指定范围内的元素，返回最后被删元素后的迭代器  |
+|   c.clear()   |                       删除c中的所有元素                       |
+
+关联容器提供一个额外的erase操作，**它接受一个key_type参数。**此版本删除所有匹配给定关键字的元素(如果存在的话)，**返回实际删除的元素的数量。**我们可以用此版本在打印结果之前从word_count中删除一个特定的单词：
+
+    if (word_count.erase(removal_word))
+        cout << "ok: " << removal_word << " removed\n";
+    else cout << "oops: " << removal_word << " not found!\n";
+
+从关联容器删除元素
+
+|   functions   |                        clarification                         |
+| :-----------: | :----------------------------------------------------------: |
+|  c.erase(k)   | 删除每个关键字为k的元素。返回一个size_type值，指出删除的数量 |
+|  c.erase(p)   |    删除迭代器p指定的真实元素，返回p后元素或尾后元素迭代器    |
+| c.erase(b, e) |                  删除b和e所表示的范围的元素                  |
+
+
+
+
+#### map 的下标操作
+
+map 和 unordered_map 容器提供了下标运算符和一个对应的 at 函数。set类型不支持下标，因为 set 中没有与关键字相关联的“值”。不能对一个 multimao 或一个 unordered_multimap进行下标操作，因为这些容器中可能有多个值与一个关键字相关联。
+
+类似其他下标运算符，map 下标运算符接受一个索引 (即，一个关键字)，获取与此关键字相关联的值。**与其他下标运算符不同的是，如果关键字并不在 map 中，会为它创建一个元素并插入到 map 中，关联值将进行值初始化。
+
+example:
+
+    map <string, size_t> word_count;
+    word_count["Anna"] = 1;
+
+**NOTE**：只可以对非 const 的 map 使用下标操作。
+
+
+| operations |                          clarifications                           |
+| :--------: | :---------------------------------------------------------------: |
+|    c[k]    |             返回关键字为k的元素，或添加元素并值初始化             |
+|  c.at(k)   | 访问关键字为k的元素，带参数检查：若k不在c中，抛出out_of_range异常 |
+
+**NOTE**：
+1. 当对一个 map 进行下标操作时，会获得一个 mapped_type 对象；但当解引用一个 map 迭代器时，会得到一个 value_type 对象。
+2. 与其他下标运算符相同的是，map 的下标运算符返回一个左值。
+
+
+
+#### 访问元素
+
+关联容器提供多种查找一个指定元素的方法。
+
+例如，如果要判断一个特定元素是否已在容器中，可能 find 是最佳选择。对于不允许重复关键字的容器，可能使用 find 还是 count 没什么区别。但对于允许重复关键字的容器，count 还会做更多的工作：如果元素在容器中，它还会统计有多少个元素有相同的关键字。example:
+
+    set<int> iset = {0,1,2,3,4,5,6,7,8,9};
+    iset.find(1);   //返回一个迭代器，指向key==1的元素
+    iset.find(11);  //返回尾后元素的迭代器
+    iset.count(1);  //返回1
+    iset.count(11); //返回0
+
+
+在一个关联容器中查找元素的操作
+
+|    operations    |                       clarifications                       |
+| :--------------: | :--------------------------------------------------------: |
+|    c.find(k)     |       返回第一个关键字为k的元素的迭代器或尾后迭代器        |
+|    c.count(k)    |                返回关键字等于k的元素的数量                 |
+| c.lower_bound(k) |           返回第一个关键字不小于k的元素的迭代器            |
+| c.upper_bound(k) |        返回一个迭代器，指向第一个关键字大于k的元素         |
+| c.equal_range(k) | 返回迭代器pair，表示关键字等于k的元素范围，或都等于c.end() |
+
+
+在一个允许重复关键字的关联容器中查找一个元素会相对复杂一些。但是**如果一个multimap 或 multiset 中有多个元素具有给定关键字，则这些元素在容器中会相邻存储**。例如，给定一个从作者到著作题目的映射，要打印一个特定作者的所有著作，有三种不同的方法：
+
+**第一种**最直观的方法是用 find 和 count
+
+    string search_item("Alain de Botton");
+    auto entries = authors.count(search_item);
+    auto iter = authors.find(search_item);
+    while (entries) {
+        cout << iter->second << endl;
+        ++iter;
+        --entries;
+    }
+
+
+**第二种**，用lower_bound和upper_bound来解决问题。因为lower指向第一个符合的元素，upper指向最后一个符合的元素。当然，**这两个操作返回的迭代器可能是容器的尾后迭代器**。如果查找的元素具有容器中最大的关键字，则此关键字的upper_bound返回尾后迭代器。如果关键字不存在，且大于容器中任何关键字，则lower_bound也返回尾后迭代器。
+
+**NOTE**：如果关键字不在容器中，则lower_bound会返回关键字的第一个安全插入点————补影响容器中元素顺序的插入位置
+
+使用这个操作，重写之前的程序：
+
+    for (auto beg = authors.lower_bound(search_item),
+                end = authors.upper_bound(search_item);
+        beg != end; ++beg)
+        cout << beg->second << endl;
+
+此程序与之前相同，但更直接。如果容器中没有这样的元素，beg 将指向第一个关键字大于 search_item 的元素，有可能是尾后迭代器。此时 beg 和 end 应该相等，尽管这两个操作并不报告关键字是否存在。
+
+
+**第三种**，这种方法是三种方法中最直接的：直接调用 equal_range。此函数接受一个关键字，返回一个迭代器 pair。若关键字存在，则第一个迭代器指向第一个与关键字匹配的元素，第二个迭代器指向最后一个匹配元素之后的位置。若未找到匹配元素，则两个迭代器都指向关键字可以插入的位置————两个迭代器相等。
+
+    for (auto pos = authors.equal_range(search_item);
+        pos.first != pos.second; ++pos.first)
+        cout << pos.first->second << endl;
+
+
+
+> example: 一个单词转换的 map。包括两个文件和程序：
+
+
+## 无序容器
+
+新标准定义了4个无序关联容器 (unordered associative container)。这些容器不是使用比较运算符来组织元素，而是使用一个哈希函数(hash function)和关键字类型的==运算符。
+
+虽然理论上哈希技术能获得更好的平均性能，但在实际中想要达到很好的效果还需要进行一些性能测试和调优工作。
+
+**NOTE**：如果关键字类型固有就是无序的，或者性能测试发现问题可以用哈希计数解决，就可以使用无序容器。
+
+
+### 无序容器操作
+
+除了哈希管理操作之外，无序容器还提供了与有序容器相同的操作(find, insert等)。这意味着map和set的操作也能用于unordered_map和unordered_set。无序容器也有允许重复关键字的版本。
+
+因此，通常可以用一个无序容器替换对应的有序容器，反之亦然。但是由于元素未按顺序存储，一个使用无序容器的程序的输出(t通常)会与使用有序容器的版本不同。
+
+重写单词计数程序：
+
+    unordered_map<string, size_t> word_count;
+    string word;
+    while (cin >> word)
+        ++word_count[word];
+    for (count auto &w : word_count)
+        cout << w.first << " occurs " << w.second
+            << ((w.second > 1) ? " times" : " time") << endl;
+    // 对于每个单词，和之前的程序相比，我们将得到相同的计数结果。但单词不太可能按字典序输出。
+
+
+### 管理桶
+
+无序容器在存储上组织为一组桶，每个桶保存零个或多个元素。无序容器使用一个哈希函数将元素映射到桶。
+
+为了访问一个元素，容器首先计算元素的哈希值，指出应该搜索哪个桶。容器将具有一个特定哈希值的所有元素都保存在相同的桶中，如果容器允许重复关键字，所有具有相同关键字的元素也都会在同一个桶中。因此，无序容器的性能依赖于哈希函数的质量和桶的数量和大小。
+
+当一个桶保存多个元素时，需要顺序搜索这些元素来查找我们想要的那个。计算一个元素的哈希值和在桶中搜索通常都是很快的操作。但是，如果一个桶中保存了很多元素，那么查找一个特定元素就需要大量比较操作。
+
+
+无序容器管理操作
+
+|        桶接口        |       clarifications       |
+| :------------------: | :------------------------: |
+|   c.bucket_count()   |     正在使用的桶的数目     |
+| c.max_bucket_count() | 容器能容纳的最多的桶的数量 |
+|   c.bucket_size(n)   |    第n个桶中有多少元素     |
+|     c.bucket(k)      | 关键字为k的元素在哪个桶中  |
+
+|         桶迭代         |          clarifications          |
+| :--------------------: | :------------------------------: |
+|     local_iterator     | 可以用来访问桶中元素的迭代器类型 |
+|  const_local_iterator  |       桶迭代器的const版本        |
+|  c.begin(n), c.end(n)  |  桶n的首元素迭代器和尾后迭代器   |
+| c.cbegin(n), c.cend(n) |           同上，const            |
+
+|      哈希策略       |                                        clarifications                                         |
+| :-----------------: | :-------------------------------------------------------------------------------------------: |
+|   c.load_factor()   |                               每个桶的平均元素数量，返回float值                               |
+| c.max_load_factor() | c试图维护的平均桶大小，返回float值。c会在需要时添加新的桶，以使得load_factor<=max_load_factor |
+|     c.rehash(n)     |               重组存储，使得bucket_count>=n且bucket_count>size/max_load_factor                |
+|    c.reserve(n)     |                          重组存储，使得c可以保存n个元素且不必rehash                           |
+
+
+### 无序容器对关键字类型的要求 (??????)
+
+
+
+
+
+## 栈
+
+### 栈的操作
+
+| operations |             clarifications             | time complexity |
+| :--------: | :------------------------------------: | :-------------: |
+|  empty()   |   returns whether the stack is empty   |      O(1)       |
+|   size()   |     returns the size of the stack      |      O(1)       |
+|   top()    | returns a reference to the top element |      O(1)       |
+|  push(g)   |    adds the element 'g' at the top     |      O(1)       |
+|   pop()    |        deletes the top element         |      O(1)       |

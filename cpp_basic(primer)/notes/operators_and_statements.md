@@ -187,7 +187,7 @@ C++11新标准引入了一种更简单的for语句，这种语句可以遍历容
 
 ### do while 语句
 
-do while statement 和 while statement 非常相似，唯一的区别是，do while statement 语句先执行循环体后检查条件。不管条件的值如何，我们都至少执行一次循环。
+do while statement 和 while statement 非常相似，唯一的区别是，do while statement 语句先执行循环体后检查条件。不管条件的值如何，都至少执行一次循环。
 
 
 ### 读取数量不定的输入数据

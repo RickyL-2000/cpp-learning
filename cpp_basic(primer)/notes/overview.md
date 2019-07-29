@@ -23,6 +23,13 @@ C++还会用到的一项预处理功能是头文件保护符(header guard)，头
 
 内含 pair 标准库类型
 
+
+### <algorithm>
+
+内含各种数据结构的函数
+
+The algorithms library defines functions for a variety of purposes (e.g. searching, sorting, counting, manipulating) that operate on ranges of elements. 
+
 ### <bits/stdc++.h>
 
 C++ 的万能头文件，其中包含了：
@@ -123,6 +130,7 @@ exercise3_10.cpp 不知道为什么，只会输出空的字符串
 exercise9_4.cpp 不知道为什么，不会等第二组输入
 
 
+
 ## 疑难杂症
 
 * size_type ???
@@ -130,3 +138,17 @@ exercise9_4.cpp 不知道为什么，不会等第二组输入
 example:
 
     for (vector<int>::size_type i = 0; i != 10; ++i) {}
+
+
+* process
+
+一个函数需要返回一个pair，可以用花括号包围的初始化器来返回pair：
+
+    pair<string, int>                             //？？？？？？这是什么操作？
+    process(vector<string> &v) {
+        //处理v
+        if (!v.empty())
+            return {v.back(), v.back().size()};  //列表初始化
+        else
+            return pair<string, int>();   //隐式构造返回值
+    }
