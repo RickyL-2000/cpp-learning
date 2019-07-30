@@ -7,7 +7,7 @@
 
 时间复杂度：O(n)
 
-思想：这个算法采用在线处理的思想，读入一个数马上进行计算。代价是算法不容易被看懂，而且我们只能知道最大和，并不知道这个子列的位置(当然了，题目并没有要求)
+思想：这个算法采用在线处理的思想，读入一个数马上进行计算。代价是算法不容易被看懂
 
 int maxSubArray(vector<int>& nums) {
     int thisSum = 0, maxSum = 0;
@@ -55,3 +55,34 @@ memory: 9 mb
 
 ## my solution 3    分治法    2019/7/30
 
+未完成
+
+
+## reference solution1    动态规划      2019/7/30
+
+时间复杂度：O(n)
+
+time: 4 ms
+
+memory: 9.3 mb
+
+    class Solution {
+    public:
+        int maxSubArray(vector<int>& nums) {
+            int thisSum = nums[0], maxSum = nums[0];
+            for (int i = 1; i != nums.size(); ++i) {
+                if (thisSum > 0) {
+                    thisSum += nums[i];  //如果之前的sum>0，那么它对于答案有帮助，就加上
+                } else {
+                    thisSum = nums[i];   //反之，那么它对于答案没有帮助，就把sum更新为当前遍历的数字
+                }
+                if (thisSum > maxSum) {
+                    maxSum = thisSum;
+                }
+            }
+            return maxSum;
+        }
+    };
+
+
+这应该算是姥姥的算法的升级版了吧...也是我看了思路之后自己码出来的代码
