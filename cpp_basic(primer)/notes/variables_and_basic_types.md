@@ -174,6 +174,41 @@ string是一种表示可边长字符序列的数据类型。
 
 **NOTE**当内层变量名字与外层相同时，内层被覆盖。想访问外层变量时，可以用**作用域操作符**来覆盖默认的作用域规则，因为全局作用域本身并没有名字，座椅当作用域操作符的左侧为空时，向全局作用域发出请求获取作用域操作符右侧名字对应的变量。
 
+
+### 静态变量
+
+static 关键字
+
+1. A static variable inside a function keeps its value between invocations.
+2. A static global variable or a function is "seen" only in the file it's declared in
+
+**NOTE**: Beware, however, this feature should be used very sparingly - it makes your code not thread-safe and harder to understand.
+
+static 的第二层意思和前面的含义相关，即“在某个作用域外不可访问”。当static应用于函数名和所有函数外部的变量时，它的意思是“在文件的外部不可以使用这个名字”。例如，编译和连接下面两个文件会引起连接器错误：
+
+    //: C03:FileStatic.cpp
+    // File scope demonstration. Compiling and linking this file with 
+    // FileStatic2.cpp
+    // will cause a linker error
+
+    // File scope means only  available in this file:
+    
+    static int fs;
+
+    int main() {
+        fs = 1;
+    } ///:~
+
+尽管在下面的文件中变量fs被声明为extern，但是连接器不会找到它，因为在FileStatic.cpp中它被声明为static
+
+    //：C03:FileStatic2.cpp {O}
+    // Trying to reference fs
+    extern int fs;
+    void func() {
+        fs = 100;
+    }
+
+
 ## 复合类型
 
 ### 引用 (???)

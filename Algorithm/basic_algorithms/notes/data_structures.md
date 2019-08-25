@@ -6,6 +6,62 @@
 
 ## 数组
 
+## 链表
+
+### 接口
+
+#### 列表节点
+
+* ADT 接口
+
+|   操 作 接 口   |                     功 能                     |
+| :-------------: | :-------------------------------------------: |
+|     data()      |             当前节点所存数据对象              |
+|     pred()      |            当前节点前驱节点的位置             |
+|     succ()      |            当前节点后继节点的位置             |
+| insertAsPred(e) | 插入前驱节点，存入被引用对象e，返回新节点位置 |
+| insertAsSucc(e) | 插入后继节点，存入被引用对象e，返回新节点位置 |
+
+* ListNode 模板类
+
+> example: ListNode_template.cpp
+
+    typedef int Rank;   //秩
+    #define ListNodePosi(T) ListNode<T>*    //列表节点位置
+
+    template <typename T> struct ListNode { //列表节点模板类（以双向链表形式实现）
+    // 成员
+        T data; ListNodePosi(T) pred; ListNodePosi(T) succ;
+    // 构造函数
+        ListNode() {}   // 针对header和trailer的构造
+        ListNode( T 2, ListNodePosi(T) p = nullptr, ListNodePosi(T) s = nullptr)
+            : data(e), pred(p), succ(s) {} // 默认构造器
+    // 操作接口
+        ListNode(T) insertAsPred(T const& e);
+        ListNode(T) insertAsSucc(T const& e);
+    };
+
+#### 列表
+
+* ADT 接口
+
+|              操 作 接 口              |                           功 能                            |
+| :-----------------------------------: | :--------------------------------------------------------: |
+|                size()                 |               报告列表当前的规模（节点总数）               |
+|           first()、 last()            |                    返回首、末节点的位置                    |
+|   insertAsFirst(e)、insertAsLast(e)   |                   将e当作首、末节点插入                    |
+| insertBefore(p, e)、insertAfter(p, e) |             将e当作节点p的直接前驱、 后继插入              |
+|               remove(p)               |               删除位置p处的节点，返回其数值                |
+|             disordered()              |               刞断所有节点是否已按非降序排列               |
+|                sort()                 |             调整各节点癿位置，使之按非降序排列             |
+|                find(e)                |               查找目标元素e，失败时反回NULL                |
+|               search(e)               | 查找目标元素e，迒回不大于e且秩最大的节点(只适用于有序列表) |
+|             deduplicate()             |                        剔除重复节点                        |
+|              uniquify()               |               剔除重复节点(只适用于有序列表)               |
+|              traverse()               |       遍历幵统一处理所有节点，处理方法由函数对象指定       |
+
+
+
 ## 向量
 
 各元素的秩(rank)互异，且均为[0, n)内的整数。在此序列中，各递归实例的秩反映了它们各自被创建的时间先后，每一递归实例的秩等于早于它出现的实例总数。 反过来，通过r亦可唯一确定e = vr。 这是向量特有的元素访问方式，称作“循秩访问” （call-by-rank）。
