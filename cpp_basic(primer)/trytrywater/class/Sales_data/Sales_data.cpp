@@ -1,6 +1,7 @@
 #include "Sales_data.h"
 #include <iostream>
 #include <string>
+using namespace std;
 
 istream &read(istream &is, Sales_data &item) {
     double price = 0;

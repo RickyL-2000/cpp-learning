@@ -2,8 +2,11 @@
     "cmake.configureOnOpen": false,
     "files.associations": {
         "*.asm": "plaintext",
+        "*.cpp": "cpp",
         "iostream": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "cctype": "cpp",
+        "string": "cpp"
     },
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c99"
