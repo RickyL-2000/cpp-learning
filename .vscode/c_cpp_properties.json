@@ -10,7 +10,7 @@
                 "C:\\MinGW\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\7.3.0\\include\\c++\\tr1",
                 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0",
                 "C:\\MinGW\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\7.3.0\\include\\c++\\x86_64-w64-mingw32",
-                "C:\\MinGW\\include\\**"
+                "C:\\MinGW\\include\\"
             ],
             "defines": [
                 "_DEBUG",
@@ -32,7 +32,7 @@
             "windowsSdkVersion": "10.0.18362.0",
             "cppStandard": "c++17",
             "configurationProvider": "vector-of-bool.cmake-tools",
-            "intelliSenseMode": "msvc-x64",
+            "intelliSenseMode": "clang-x86",
             "cStandard": "c99"
         }
     ],
