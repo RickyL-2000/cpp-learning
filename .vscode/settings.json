@@ -1,14 +1,16 @@
 {
     "cmake.configureOnOpen": false,
     "files.associations": {
-        "*.asm": "plaintext",
+        "*.asm": "lc3",
         "*.cpp": "cpp",
         "iostream": "cpp",
         "iosfwd": "cpp",
         "cctype": "cpp",
         "string": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "cmath": "cpp"
     },
     "C_Cpp.default.cppStandard": "c++17",
-    "C_Cpp.default.cStandard": "c99"
+    "C_Cpp.default.cStandard": "c99",
+    "better-comments.highlightPlainText": true
 }

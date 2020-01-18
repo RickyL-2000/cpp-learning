@@ -4,10 +4,14 @@ using namespace std;
 
 class DisjSet {
 private:
-    int maxsize;
+    size_t maxsize;
     vector<int> parent;
 public:
-    DisjSet(int n) : maxsize(n), parent(vector<int>(maxsize, -1)) {}
+    DisjSet(int n) : maxsize(n), parent(vector<int>(maxsize)) {
+        for (size_t i = 0; i < maxsize; i++) {
+            parent[i] = i;
+        }
+    }
 
     int find(int x) {
         return parent[x] < 0 ? x : parent[x] = find(parent[x]);
