@@ -1,7 +1,14 @@
-/**
- * @brief reference solution  
- */
+# 1002 Business
 
+## ref sol 1    20/1/19
+
+我吐了，原来top是顶级的意思，advanced才是甲级
+
+动态规划做就完了。本题的关键因素在于每个任务的deadline。因此，之前需要对所有任务按deadline排序。动态规划的vdp[i][j]应当表示第j天在考虑到第i个任务时所能得到的最大收益。状态转移方程如下：vdp[i][j]=max(vdp[i-1][j],vdp[i-1][t]+v[i-1].p)，在这里，t表示第i个任务完成之前，完成i-1个任务至多所需要的天数。
+
+> business.cpp
+
+```
 #include<bits/stdc++.h>
 using namespace std;
 struct task
@@ -35,3 +42,4 @@ int main()
 	printf("%d",vdp[n*m+n+m]);
 	return 0;
 }
+```
