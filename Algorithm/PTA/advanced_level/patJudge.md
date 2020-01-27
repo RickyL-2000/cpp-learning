@@ -1,10 +1,12 @@
 # PAT judge
 
-## my sol 1     20/1/26
+## my sol 1     20/1/26     90 min
 
 19/25
 
-有两个测试点没有过...肯定还是想漏了几个可能行
+有两个测试点没有过...肯定还是想漏了几个可能性
+
+> patJudge.cpp
 
 ```
 #include <iostream>
@@ -80,4 +82,6 @@ int main() {
     return 0;
 }
 ```
+
+## ref sol 1
 

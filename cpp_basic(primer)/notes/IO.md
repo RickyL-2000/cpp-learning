@@ -47,3 +47,6 @@ std::cout << std::endl;
 
     string response;
     getline(cin, response);
+
+## cstdio
+

@@ -7,7 +7,7 @@ struct User {
     int score[6];     // start from 1
     int total = 0;
     int perN = 0;     // # of perfect answered problems
-    User(int i) : id(i) {fill(score, score+6, -1);}
+    User(int i) : id(i) {fill(score+1, score+6, -1);}
 };
 
 User* users[10010];     // index: first id, then rank
