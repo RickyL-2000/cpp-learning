@@ -20,7 +20,7 @@ option (USE_MYMATH
 # so that we will find TutorialConfig.h
 if (USE_MYMATH)
     include_directories("${PROJECT_BINARY_DIR}/MathFunctions")
-    add_subdirectory(MathFunctions)
+    add_subdirectory(MathFunctions )
     set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions)
 endif (USE_MYMATH)
  
