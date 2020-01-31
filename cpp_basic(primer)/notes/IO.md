@@ -50,3 +50,15 @@ std::cout << std::endl;
 
 ## cstdio
 
+## string
+
+### getline()
+
+```
+istream& getline (istream&  is, string& str, char delim);
+istream& getline (istream&& is, string& str, char delim);
+istream& getline (istream&  is, string& str);
+istream& getline (istream&& is, string& str);
+```
+
+读取的istream是作为参数is传进函数的。读取的字符串保存在string类型的str中。使用过程中不需要将str变为C风格字符串
