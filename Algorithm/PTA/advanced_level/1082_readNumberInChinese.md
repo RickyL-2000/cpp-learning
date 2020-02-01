@@ -13,3 +13,5 @@
 ## ref sol 1
 
 > 1082_readNumberInChinese2.cpp
+
+还是很麻烦...不过把一亿分成了三个部分，感觉要比我的简单一些些
