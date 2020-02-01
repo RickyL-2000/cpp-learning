@@ -7,6 +7,11 @@ class Food;
 
 class Snake {
 private:
+    /**
+     * _pos[0] -- head
+     * _pos[i][0] -- x
+     * _pos[i][1] -- y 
+     */
     int _pos[255][2];
     int _len;
     int _dir;
@@ -32,7 +37,7 @@ public:
     /**
      * change the direction according to kb 
      */
-    void changeDirection();
+    void changeDirection(Command command);
 
     /**
      * @return true if ate itself
@@ -41,7 +46,7 @@ public:
     /**
      * @return true if hit wall 
      */
-    void checkHitWall();
+    bool checkHitWall(Board& board);
 };
 
 class Food {

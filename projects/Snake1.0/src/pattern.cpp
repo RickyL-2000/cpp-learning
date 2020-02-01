@@ -29,8 +29,70 @@ void Snake::draw() {
 
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), co);
 
-        if (i == 0) printf("◇");
-        else printf("□");
+        if (i == 0) printf("S");
+        else printf("D");
+    }
+}
+
+void Snake::move(Command command) {
+    int lastX = _pos[_len-1][0],
+        lastY = _pos[_len-1][1];
+    for (size_t i = _len-1; i > 0; i--) {
+        _pos[i][0] = _pos[i-1][0];
+        _pos[i][1] = _pos[i-1][1];
+    }
+    changeDirection(command);
+    switch (_dir) {
+        case Up: {
+            _pos[0][0] = _pos[1][0];
+            _pos[0][1] = _pos[1][1] - 1;
+            break;
+        }
+        case Down: {
+            _pos[0][0] = _pos[1][0];
+            _pos[0][1] = _pos[1][1] + 1;
+            break;
+        }
+        case Left: {
+            _pos[0][0] = _pos[1][0] - 1;
+            _pos[0][1] = _pos[1][1];
+            break;
+        }
+        case Right: {
+            _pos[0][0] = _pos[1][0] + 1;
+            _pos[0][1] = _pos[1][1];
+            break;
+        }
+    }
+
+    // clear the last part of the body
+    COORD co;
+    co.X = lastX * 2 + 1;
+    co.Y = lastY + 1;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), co);
+    printf(" ");
+}
+
+void Snake::changeDirection(Command command) {
+    switch (command) {
+        case Up: {
+            if (_dir != Down) _dir = Up;
+            break;
+        }
+        case Down: {
+            if (_dir != Up) _dir = Down;
+            break;
+        }
+        case Left: {
+            if (_dir != Right) _dir = Left;
+            break;
+        }
+        case Right: {
+            if (_dir != Left) _dir = Right;
+            break;
+        }
+        case Terminate:
+        case noCommand: break;
     }
 }
 
@@ -39,6 +101,20 @@ void Snake::tryEat(Food& food) {
 
     food.prod(*this);
     _len++;     // @bug
+}
+
+bool Snake::checkEatSelf() {
+    for (size_t i = 1; i < _len; i++) {
+        if (_pos[i][0] == _pos[0][0] && _pos[i][1] == _pos[0][1])
+            return true;
+    }
+    return false;
+}
+
+bool Snake::checkHitWall(Board& board) {
+    if (_pos[0][0] < 0 || _pos[0][0] >= board.W() || _pos[0][1] < 0 || _pos[0][1] >= board.H()+1)
+        return true;
+    return false;
 }
 
 Food::Food(Snake& snake) {

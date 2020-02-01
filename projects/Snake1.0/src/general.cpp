@@ -4,17 +4,23 @@
 #include <iostream>
 
 void Board::draw() {
+    COORD co;
+    co.X = 0;
+    co.Y = 1;
+
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), co);
+
     std::cout << _wall;
 }
 
 GameControl::GameControl() {
     _state = running;
-    difficulty = 500;
+    _diff = 500;
 };
 
 void GameControl::terminate(Board& board) {
     COORD co;
-    co.X = board.W() * 2;
+    co.X = board.W() * 3 / 2;
     co.Y = board.H() / 2;
 
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), co);
@@ -23,7 +29,7 @@ void GameControl::terminate(Board& board) {
 }
 
 Command GameControl::input() {
-    char ch;
+    char ch = ' ';
     if (_kbhit()) ch = _getch();
 
     switch (ch) {
@@ -32,5 +38,6 @@ Command GameControl::input() {
         case 'a': return Left;
         case 'd': return Right;
         case 'q': return Terminate;
+        case ' ': return noCommand;
     }
 }

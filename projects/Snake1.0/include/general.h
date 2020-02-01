@@ -1,7 +1,7 @@
-#include <string>
-
 #ifndef GENERAL_H
 #define GENERAL_H
+
+#include <string>
 
 enum GameState {
     running,
@@ -14,6 +14,7 @@ enum Command {
     Left,
     Right,
     Terminate,
+    noCommand,
 };
 
 class Board {
@@ -25,26 +26,27 @@ private:
 public:
     Board() : _width(15), _height(15) {
         _wall = "\
-            +------------------------------+\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            |                              |\n\
-            +------------------------------+\n\
-            type \"asdw\" to control \"q\" to quit  \
-            ";
-    }
++------------------------------+\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
+|                              |\n\
++------------------------------+\n\
+   type \"asdw\" to control\n\
+        \"q\" to quit\
+";
+}
 
     int W() {return _width;}
     int H() {return _height;}
@@ -59,10 +61,11 @@ private:
     /**
      * miliseconds 
      */
-    int difficulty;
+    int _diff;
 public:
     GameControl();
     int state() {return _state;}
+    int difficulty() {return _diff;}
     void changeState() {_state = _state == gameOver ? running : gameOver;} 
     void terminate(Board& board);
     Command input();
