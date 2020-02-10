@@ -4,7 +4,7 @@
 #include <math.h>
 using namespace std;
 
-const int MAXN = 10010;
+const int MAXN = 100010;
 int n, root, paths = 0, maxLevel;
 double p, r;
 int sup[MAXN], level[MAXN], tempLevel[MAXN];
@@ -19,8 +19,11 @@ int main() {
     }
 
     stack<int> stk;
+    int index, temp;
     for (int i = 0; i < n; i++) {
-        int index = i, temp;
+        index = i;
+        temp = 0;
+        if (level[index] != 0 || index == root) continue;
         while (sup[index] != -1 && level[index] == 0) {
             stk.push(index);
             index = sup[index];
@@ -28,7 +31,7 @@ int main() {
         if (!stk.empty()) {
             temp = stk.top();
             stk.pop();
-            level[temp] = sup[index] + 1;
+            level[temp] = level[index] + 1;
         }
         while (!stk.empty()) {
             level[stk.top()] = level[temp] + 1;
@@ -38,13 +41,12 @@ int main() {
         if (level[temp] > maxLevel) {
             paths = 1;
             maxLevel = level[temp];
-        }
-        if (level[temp] == maxLevel) {
+        } else if (level[temp] == maxLevel) {
             paths++;
         }
     }
 
-    printf("%.2lf %d", p * pow(1 + r, maxLevel - 1), paths);
+    printf("%.2lf %d", p * pow(1 + r, maxLevel), paths);
 
     return 0;    
 }

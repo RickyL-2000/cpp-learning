@@ -14,7 +14,9 @@
         "random": "cpp",
         "algorithm": "cpp",
         "array": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "string_view": "cpp",
+        "regex": "cpp"
     },
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c99",
