@@ -17,3 +17,9 @@ update 20/1/30
 过了！ 
 
 20/20
+
+## ref sol 1
+
+计算 gcd 的最佳方法！
+
+long long gcd(long long a, long long b) {return b == 0 ? abs(a) : gcd(b, a % b);}

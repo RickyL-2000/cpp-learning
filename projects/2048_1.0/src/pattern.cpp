@@ -35,10 +35,16 @@ void Board::draw() {
 Cell::Cell() {
     _cols = 4;
     _rows = 4;
+    _cell_width = 9;
+    _cell_height = 3;
 
     _value = new int*[_rows];
+    _cell_x = new int*[_rows];
+    _cell_y = new int*[_rows];
     for (int j = 0; j < _rows; j++) {
         _value[j] = new int[_cols];
+        _cell_x[j] = new int[_cols];
+        _cell_y[j] = new int[_cols];
     }
 
     for (int i = 0; i < 4; i++) {
@@ -46,12 +52,26 @@ Cell::Cell() {
             _value[i][j] = 0;
         }
     }
+
+    for (int i = 0; i < _rows; i++) {
+        for (int j = 0; j < _cols; j++) {
+            _cell_x[i][j] = i * (_cell_width+1) + 1;
+            _cell_y[i][j] = j * (_cell_height+1) + 1;
+        }
+    }
 }
 
 Cell::Cell(int cols, int rows): _cols(cols), _rows(rows) {
+    _cell_width = 9;
+    _cell_height = 3;
+
     _value = new int*[_rows];
+    _cell_x = new int*[_rows];
+    _cell_y = new int*[_rows];
     for (int j = 0; j < _rows; j++) {
         _value[j] = new int[_cols];
+        _cell_x[j] = new int[_cols];
+        _cell_y[j] = new int[_cols];
     }
 
     for (int i = 0; i < 4; i++) {
@@ -59,13 +79,24 @@ Cell::Cell(int cols, int rows): _cols(cols), _rows(rows) {
             _value[i][j] = 0;
         }
     } 
+
+    for (int i = 0; i < _rows; i++) {
+        for (int j = 0; j < _cols; j++) {
+            _cell_x[i][j] = i * (_cell_width+1) + 1;
+            _cell_y[i][j] = j * (_cell_height+1) + 1;
+        }
+    }
 }
 
 Cell::~Cell() {
     for (int i = 0; i < _rows; i++) {
         delete []_value[i];
+        delete []_cell_x[i];
+        delete []_cell_y[i];
     }
     delete []_value;
+    delete []_cell_x;
+    delete []_cell_y;
 }
 
 void Cell::move(Command command) {
@@ -169,4 +200,8 @@ void Cell::importMat(const int (&mat)[4][4]) {
             _value[y][x] = mat[y][x];
         }
     }   
+}
+
+void Cell::draw() {
+
 }

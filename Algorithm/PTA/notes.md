@@ -2,6 +2,49 @@
 
 ## containers
 
+### vector
+
+标准库类型vector表示对象的集合，其中所有对象的类型都相同。集合中的每个对象都有一个与之对应的索引，索引用于访问对象。所以vector也常被称作容器(container)
+
+vector是一个封装了动态大小数组的顺序容器(sequence container)，是一个能够存放任意类型的动态数组。
+
+**NOTE**：
+1. 因为引用不是对象，所以不存在包含引用的vector。
+2. 早期版本的C++标准中，如果vector的元素还是vector(或者其他模板类型)，则其定义的形式有所不同，必须在外层vector对象的右尖括号和其元素类型之间添加一个空格:```vector<vector<int> > file;```
+
+
+#### 定义和初始化vector对象
+
+初始化vector对象的方法：
+```
+    vector<T> v1;                       //空vector，它潜在的元素是T类型的，执行默认初始化
+    vector<T> v2(v1);                   //v2中包含有v1所有元素的副本
+    vector<T> v2 = v1;                  //同上
+    vector<T> v3(n, val);               //包含了n个重复的元素，每个元素的值都是val
+    vector<T> v4(n);                    //包含了n个重复地执行了*值初始化的*对象
+    vector<T> v5{a, b, c...}            //列表初始化，包含了初始值个数的元素，每个元素被赋予相应的初始值
+    vector<T> v5 = {a, b, c...}         //同上
+```
+
+#### vector操作
+
+|    operation    |         meaning          |
+| :-------------: | :----------------------: |
+|    v.empty()    |         返回真假         |
+|    v.size()     |         返回个数         |
+|      v[n]       |  返回n位置上元素的引用   |
+|     v1 = v2     |         拷贝替换         |
+| v1 = {a,b,c...} |         拷贝替换         |
+|    v1 == v2     |         完全相同         |
+|    v1 != v2     |           不同           |
+|  <. <=, >, >=   |    以字典顺序进行比较    |
+| v.push_back(t)  |     在尾端添加一个t      |
+|  v.pop_back()   | 删除最后一个元素（无返） |
+|    v.back()     |     返回最后一个元素     |
+|    v.clear()    |       删除所有元素       |
+
+
+
 ### pair
 
 > header: <utility>

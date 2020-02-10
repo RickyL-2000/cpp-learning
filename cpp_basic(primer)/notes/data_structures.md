@@ -68,29 +68,28 @@ example:
 vector是一个封装了动态大小数组的顺序容器(sequence container)，是一个能够存放任意类型的动态数组。
 
 vector被包含在头文件<vector>的标准库中，可以用using声明进行简化：
-
+```
     #include <vector>
     using std::vector;
-
+```
 C++语言既有类模板(class template)，也有函数模板，其中vector是一个类模板。模板本身不是类或函数，相反可以将模板看作编译器生成类或者函数编写的一份说明。编译器根据模板创建类或者函数的过程称为实例化(instantiation)，当使用模板时，需要指出编译器应把类或者函数实例化成何种类型。
 
 对于类模板来说，需要提供一些额外信息来指定模板到底实例化成什么样的类。提供信息的方式：在模板名字后面跟一对尖括号，在括号内放上信息。example:
-
+```
     vector<int> ivec;              //ivec保存int类型的对象
     vector<Sales_item> Sales_vec;  //保存Sales_item类型的对象
     vector<vector<string>> file;   //该向量的元素是vector对象
-
+```
 **NOTE**：
 1. 因为引用不是对象，所以不存在包含引用的vector。
 2. 早期版本的C++标准中，如果vector的元素还是vector(或者其他模板类型)，则其定义的形式有所不同，必须在外层vector对象的右尖括号和其元素类型之间添加一个空格:
-
-        vector<vector<int> > file;
+```vector<vector<int> > file;```
 
 
 ### 定义和初始化vector对象
 
 初始化vector对象的方法：
-
+```
     vector<T> v1;                       //空vector，它潜在的元素是T类型的，执行默认初始化
     vector<T> v2(v1);                   //v2中包含有v1所有元素的副本
     vector<T> v2 = v1;                  //同上
@@ -98,7 +97,7 @@ C++语言既有类模板(class template)，也有函数模板，其中vector是�
     vector<T> v4(n);                    //包含了n个重复地执行了*值初始化的*对象
     vector<T> v5{a, b, c...}            //列表初始化，包含了初始值个数的元素，每个元素被赋予相应的初始值
     vector<T> v5 = {a, b, c...}         //同上
-
+```
 **NOTE**：
 1. 拷贝vector对象的时候其类型必须相同
 2. 在大多数情况下C++提供的几种初始化方式可以相互等价地使用，不过并非一直如此。几种特殊情况：
@@ -132,6 +131,7 @@ C++语言既有类模板(class template)，也有函数模板，其中vector是�
 | v.push_back(t)  |     在尾端添加一个t      |
 |  v.pop_back()   | 删除最后一个元素（无返） |
 |    v.back()     |     返回最后一个元素     |
+|    v.clear()    |       删除所有元素       |
 
 
 * 添加元素 push_back

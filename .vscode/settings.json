@@ -3,13 +3,18 @@
     "files.associations": {
         "*.asm": "lc3",
         "*.cpp": "cpp",
+        "*.m": "matlab",
         "iostream": "cpp",
         "iosfwd": "cpp",
         "cctype": "cpp",
         "string": "cpp",
         "vector": "cpp",
         "cmath": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "random": "cpp",
+        "algorithm": "cpp",
+        "array": "cpp",
+        "*.tcc": "cpp"
     },
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c99",

@@ -22,6 +22,11 @@ private:
     int _cols;
     int _rows;
     int** _value;
+
+    int _cell_width; // ! 9   note: note after transformation!
+    int _cell_height;    // 3
+    int** _cell_x;
+    int** _cell_y;
 public:
     Cell();
     Cell(int cols, int rows);
