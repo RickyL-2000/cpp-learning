@@ -1,5 +1,21 @@
 # advanced level top design
 
+## 分类
+
+-------------------------------
+
+1098_insertionOrHeapSort.cpp
+
+巩固插入排序和堆排序
+
+20/2/12 一遍过
+
+-------------------------------
+
+1099_buildABinarySearchTree.cpp
+
+巩固二叉搜索树
+
 ## Emergency - the most emergent problems to solve
 
 1. 1076 forwardsOnWeibo
