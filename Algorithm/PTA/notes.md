@@ -26,6 +26,10 @@ vector是一个封装了动态大小数组的顺序容器(sequence container)，
     vector<T> v5 = {a, b, c...}         //同上
 ```
 
+**NOTE**:
+要初始化二维数组的方法：
+```vector<vector<int> > mat(rows, vector<int>(cols));```
+
 #### vector操作
 
 |    operation    |         meaning          |
@@ -199,5 +203,15 @@ prototype:  ```fill(begin, end, val)```
 
 ### sort()
 
+## ALGORITHMS
 
+### tree
 
+tree的表示方法(怎么方便怎么来)，tree的构建，tree的遍历
+
+### 并查集
+
+> battleOverCities.cpp
+> 1106_lowerstPriceInSupplyChain.cpp
+
+也可以用dfs做！
