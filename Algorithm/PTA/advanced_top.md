@@ -20,6 +20,10 @@
 
 1. 1076 forwardsOnWeibo
 
+## TODOS
+
+1. 1112_stuckedKeyboard自己的方法可能不是很好，得去看看别人的方法
+
 ## Journal
 
 1089_insertOrMerge

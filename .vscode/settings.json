@@ -18,7 +18,9 @@
         "string_view": "cpp",
         "regex": "cpp",
         "istream": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "ratio": "cpp",
+        "cstdint": "cpp"
     },
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c99",
