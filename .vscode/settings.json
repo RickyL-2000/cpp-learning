@@ -4,6 +4,8 @@
         "*.asm": "lc3",
         "*.cpp": "cpp",
         "*.m": "matlab",
+        "<ipython-input-9-48c93af53ccf>": "python",
+        "<ipython-input-34-5efa252878ce>": "python",
         "iostream": "cpp",
         "iosfwd": "cpp",
         "cctype": "cpp",
@@ -20,7 +22,8 @@
         "istream": "cpp",
         "map": "cpp",
         "ratio": "cpp",
-        "cstdint": "cpp"
+        "cstdint": "cpp",
+        "streambuf": "cpp"
     },
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c99",
