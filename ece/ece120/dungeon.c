@@ -37,7 +37,7 @@ main ()
    /* Play a game */
    /***************/
       room = 0;
-      while ( room < 3 )	/* Explore the maze */
+      while ( room < 3 || room == 5)	/* Explore the maze */
       {
          if ( room == 0 )
          {
@@ -48,10 +48,11 @@ main ()
             printf("a tunnel under a large flagstone, ");
             printf("and an air vent large enough to crawl through.\n");
             printf("Which exit do you wish to explore?\n");
-            printf("Enter 0 for flagstone, or 1 for air vent.  "); 
+            printf("Enter 0 for flagstone, or 1 for air vent. Also, you can choose 2."); 
             scanf("%d", &choice); 
             if ( choice == 0 ) { room = 3; }
             if ( choice == 1 ) { room = 1; }
+            if ( choice == 2 ) { room = 5; }
          }
          else if ( room == 1 )
          {
@@ -107,6 +108,16 @@ main ()
             scanf("%d", &choice); 
             if ( choice == 0 ) { room = 1; }
             if ( choice == 1 ) { room = 4; }
+         }
+         else if ( room == 5)
+         {
+             printf("ok, now you have 4 choices: \n");
+             printf("Enter 0 to go back, or 1, 2, 3, whatever you like.");
+             scanf("%d", &choice);
+             if ( choice == 0) { room = 0; }
+             if ( choice == 1) { room = 3; }
+             if ( choice == 2) { room = 1; }
+             if ( choice == 3) { room = 2; }
          }
          printf("\n");
       }
