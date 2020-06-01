@@ -108,3 +108,9 @@ int main() {
     return 0;
 }
 ```
+
+## my sol 2
+
+主要是用于复习一下四个月前的东西...
+
+> 1002_A+B_for_polynomials2.cpp
