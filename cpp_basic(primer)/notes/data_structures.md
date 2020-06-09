@@ -18,13 +18,15 @@ example:
 
 **另两种写法**：
 1. 
-    
+    ``` C++
     struct Sales_data { ... } accum, trans, *salesptr;
+    ```
 2. 
-    
+    ``` C++
     struct Sales_data { ... };
     Sales_data accum, trans, *salesptr;
     //与上一种相同，可能更好
+    ```
 
 此种类定义的成员，只有数据成员(data member)。类的数据成员定义了类的对象的具体内容，每个对象有自己的一份数据成员拷贝。
 
@@ -68,14 +70,14 @@ example:
 vector是一个封装了动态大小数组的顺序容器(sequence container)，是一个能够存放任意类型的动态数组。
 
 vector被包含在头文件<vector>的标准库中，可以用using声明进行简化：
-```
+``` C++
     #include <vector>
     using std::vector;
 ```
 C++语言既有类模板(class template)，也有函数模板，其中vector是一个类模板。模板本身不是类或函数，相反可以将模板看作编译器生成类或者函数编写的一份说明。编译器根据模板创建类或者函数的过程称为实例化(instantiation)，当使用模板时，需要指出编译器应把类或者函数实例化成何种类型。
 
 对于类模板来说，需要提供一些额外信息来指定模板到底实例化成什么样的类。提供信息的方式：在模板名字后面跟一对尖括号，在括号内放上信息。example:
-```
+``` C++
     vector<int> ivec;              //ivec保存int类型的对象
     vector<Sales_item> Sales_vec;  //保存Sales_item类型的对象
     vector<vector<string>> file;   //该向量的元素是vector对象

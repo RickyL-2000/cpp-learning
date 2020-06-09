@@ -22,44 +22,45 @@ example: Sales_item item
 ### 设计类
 
 example, improved Sales_data class:
+``` C++
+struct Sales_data {
+    // new members, operations:
+    std::string isbn() const {return bookNo; }
+    Sales_data& combine (const Sales_data&);
+    double avg_price() const;
 
-    struct Sales_data {
-        // new members, operations:
-        std::string isbn() const {return bookNo; }
-        Sales_data& combine (const Sales_data&);
-        double avg_price() const;
-    
-        //data members
-        std::string bookNo;
-        unsigned units_sold = 0;
-        double revenue = 0.0;
-    };
-    // Sales_data的非成员接口函数
-    Sales_data add(const Sales_data&, const Sales_data&);
-    std::ostream &print(std::ostream&, const Sales_data&);
-    std::istream &read(std::istream, Sales_data&);
-    
-    //定义在类内部的函数是隐式的 inline 函数 (???)
-    
-    //接下来使用Sales_data类
-    Sales_data total;
-    if (read(cin, total)) {
-        Sales_data trans;
-        while(read(cin, trans)) {
-            if (total.isbn() == trans.isbn())
-                total.combine(trans);
-            else {
-                print(cout, total) << endl;
-                total = trans;
-            }
+    //data members
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+};
+// Sales_data的非成员接口函数
+Sales_data add(const Sales_data&, const Sales_data&);
+std::ostream &print(std::ostream&, const Sales_data&);
+std::istream &read(std::istream, Sales_data&);
+
+//定义在类内部的函数是隐式的 inline 函数 (???)
+
+//接下来使用Sales_data类
+Sales_data total;
+if (read(cin, total)) {
+    Sales_data trans;
+    while(read(cin, trans)) {
+        if (total.isbn() == trans.isbn())
+            total.combine(trans);
+        else {
+            print(cout, total) << endl;
+            total = trans;
         }
-        print(cout, total) << endl;
-    } else {
-        cerr << "No data?!" << endl;
     }
-    //各函数解释：
-    //combine() 将trans的内容添加到total表示的实时汇总结果中去
-    //print() 将之前一本书的汇总信息输出出来，返回它的流参数的引用
+    print(cout, total) << endl;
+} else {
+    cerr << "No data?!" << endl;
+}
+//各函数解释：
+//combine() 将trans的内容添加到total表示的实时汇总结果中去
+//print() 将之前一本书的汇总信息输出出来，返回它的流参数的引用
+```
 
 #### 成员函数 (member function)
 
@@ -70,9 +71,9 @@ example, improved Sales_data class:
 ##### 引入 this
 
 观察对 isbn 成员函数的调用：
-
+``` C++
     total.isbn()
-
+```
 当我们调用 isbn 成员函数时，实际上是在替另一个对象 bookNo 调用它。isbn 隐式地指向调用该函数的对象的成员。
 
 成员函数通过一个名为 this 的额外的隐式参数来访问调用它的那个对象。当调用一个成员函数时，用请求该函数的对象地址初始化 this。所以 isbn 成员函数的调用可以认为是被编译器重写成了：
@@ -135,7 +136,7 @@ isbn 函数的另一个关键之处是紧随参数列表之后的 const 关键�
 4. 一个空参数列表（默认构造函数）
 
 给类添加了这些成员之后，将得到：
-
+``` C++
     struct Sales_data {
         Sales_data() = default; //默认构造函数
         Sales_data(const std::string &s) : bookNo(s) {}
@@ -150,7 +151,7 @@ isbn 函数的另一个关键之处是紧随参数列表之后的 const 关键�
         unsigned units_sold = 0;
         double revenue = 0.0;
     }
-
+```
 在第二个和第三个构造函数中，冒号以及冒号和花括号之间的代码被称为**构造函数初始值列表**，它负责为新创建的对象的一个或几个数据成员赋初值。
 
 在第二个构造函数中，只有一个string类型参数被初始化了，其他数据成员被构造函数初始值列表忽略了，此时，它们将以与合成默认构造函数相同的方式隐式初始化。因此只接受一个string参数的构造函数等价于：
