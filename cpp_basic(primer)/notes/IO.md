@@ -48,6 +48,36 @@ std::cout << std::endl;
     string response;
     getline(cin, response);
 
+
+## string 流
+
+``` C++
+    #include <sstream>
+```
+
+sstream 库定义了三种类：istringstream、ostringstream和stringstream，分别用来进行流的输入、输出和输入输出操作。
+
+　　1.stringstream::str(); returns a string object with a copy of the current contents of the stream.
+
+　　2.stringstream::str (const string& s); sets s as the contents of the stream, discarding any previous contents.
+
+　　3.stringstream 清空，stringstream s; s.str("");
+
+　　4.实现任意类型的转换
+      ``` C++
+　　　　template<typename out_type, typename in_value>
+　　　　out_type convert(const in_value & t){
+　　　　　　stringstream stream;
+　　　　　　stream << t;//向流中传值
+　　　　　　out_type result;//这里存储转换结果
+　　　　　　stream >> result;//向result中写入值
+　　　　　　return result;
+　　　　}
+      ```
+
+    
+
+
 ## cstdio
 
 ### printf()
