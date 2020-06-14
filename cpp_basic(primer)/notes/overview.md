@@ -34,7 +34,7 @@ The algorithms library defines functions for a variety of purposes (e.g. searchi
 
 C++ 的万能头文件，其中包含了：
 
-    //c
+``` C++
     #ifndef _GLIBCXX_NO_ASSERT
     #include<cassert>
     #endif
@@ -120,6 +120,7 @@ C++ 的万能头文件，其中包含了：
     #include <unordered_map>
     #include <unordered_set>
     #endif
+```
 
 建议初学的话还是老老实实一个个include比较好...
 
