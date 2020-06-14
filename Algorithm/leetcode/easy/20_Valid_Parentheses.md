@@ -17,6 +17,7 @@ invalid examples:
 
 初稿：Valid_Parenthses.cpp
 
+``` C++
     #include <iostream>
     #include <string>
     #include <vector>
@@ -68,6 +69,7 @@ invalid examples:
             return true;
         }
     }
+```
 
 主要问题是bug，fail
 
@@ -97,7 +99,7 @@ time: 8 ms
 
 memory: 8.4 mb
 
-
+``` C++
     bool isValid(string s) {
         vector<char> stack;
         for (int i = 0; i < s.length(); ++i) {
@@ -131,7 +133,7 @@ memory: 8.4 mb
         }
         return true;
     }
-
+```
  
 问题：逻辑还是有点繁琐啊
 
@@ -140,13 +142,14 @@ memory: 8.4 mb
 
 time: 0 ms
 
+``` C++
     bool isValid(string s) {
         vector<char> pre = {'(', '{', '['};
         vector<char> post = {')', '}', ']'};
         stack<char> st;                           // 原来真的有栈啊
         for ( auto ch : s ) {
             if ( st.empty() ){ // st empty
-                if (  find( post.begin(), post.end(), ch) != post.end() ){  // } ] )   // 妙啊！！！！
+                if (  find(post.begin(), post.end(), ch) != post.end() ){  // } ] )   // 妙啊！！！！
                     return false;
                 } else {
                     st.push( ch );
@@ -166,3 +169,4 @@ time: 0 ms
         }
         return st.empty() ? 1 : 0;
     }
+```

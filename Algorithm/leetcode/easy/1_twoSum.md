@@ -5,7 +5,7 @@
 time: 288 ms
 
 memory: 9.1 mb
-
+``` C++
     class Solution {
     public:
         vector<int> twoSum(vector<int>& nums, int target) {
@@ -20,7 +20,7 @@ memory: 9.1 mb
             return {i,j}; //不明白这里的return除了语法正确外有何意义
         }
     };
-
+```
 想出的最简单的暴力方法，本来还想先用快排把容器排个序再查找的，但是感觉不会简单到哪里去。
 
 
@@ -29,7 +29,7 @@ memory: 9.1 mb
 time: 16 ms
 
 memory:
-
+``` C++
     class Solution {
     public:
         vector<int> twoSum(vector<int>& nums, int target) {
@@ -40,13 +40,14 @@ memory:
             for (int i = 0; i < nums.size(); ++i) {
                 int t = target - nums[i];
                 if (ump.find(t) != ump.end() && i != ump[t]) {
+                    // 如果能找到互补的数而且不是它自己
                     return {i, ump[t]};
                 }
             }
             return {};
         }
     };
-
+```
 
 ## reference solution 2    <hash map>
 
@@ -56,7 +57,7 @@ time: 00 ms (???)
 
 memory:
 
-
+``` C++
     class Solution {
     public:
         vector<int> twoSum(vector<int>& nums, int target) {
@@ -79,3 +80,4 @@ memory:
             return result;
         }
     };
+```

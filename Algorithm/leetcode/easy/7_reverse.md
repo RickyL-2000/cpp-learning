@@ -53,6 +53,7 @@ time: 8 ms
 
 memory: 8.3 mb
 
+``` C++
     int reverse(int x) {
         int rev = 0;
         while (x != 0) {
@@ -66,6 +67,7 @@ memory: 8.3 mb
         }
         return rev;
     }
+```
 
 想法是，既然rev*10有可能会溢出，那么不如直接考虑rev和INT_MAX/10之间的关系
 
@@ -74,6 +76,7 @@ memory: 8.3 mb
 
 ## reference solution 2
 
+``` C++
     int reverse(int x) {
         long temp = 0;
        
@@ -89,17 +92,22 @@ memory: 8.3 mb
         return (int)temp;
     }
 
+```
 这种解法就有点cheat的意思了，它先把temp声明为long型的整数，然后再回来检查是否溢出了int的整数范围...
 
 
 ## reference solution 3    反转字符串
 
+``` C++
+    #include <string>
+    #include <sstream>
+
     class Solution {
     public:
         int reverse(int x) {
             long long_x;
-            string str_x=to_string(x);//将数字转换成字符串
-            int pos=str_x.find_first_not_of("-");
+            string str_x = to_string(x);//将数字转换成字符串
+            int pos = str_x.find_first_not_of("-");
             //找到第一个与‘-’不匹配的字符位置
             
             std::reverse(str_x.begin()+pos,str_x.end());
@@ -107,8 +115,9 @@ memory: 8.3 mb
 
             stringstream out(str_x);
             out >> long_x;//将string转换成long存储在long_x中
-            if(long_x>INT_MAX || long_x<INT_MIN)
+            if(long_x > INT_MAX || long_x < INT_MIN)
                 return 0;
             return long_x;    
         }
     };
+```

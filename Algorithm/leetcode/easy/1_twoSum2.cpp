@@ -10,7 +10,7 @@ public:
         std::vector<int> result(2,-1);
         
         for (int i = 0; i < nums.size(); ++i) {
-            n_map.insert(make_pair(nums[i],i));
+            n_map.insert(std::make_pair(nums[i],i));
         }
         
         for (int i = 0; i < nums.size(); ++i) {
@@ -23,3 +23,12 @@ public:
         return result;
     }
 };
+
+int main() {
+    Solution s;
+    std::vector<int> nums = {2, 7, 11, 15};
+    int target = 9;
+    std::vector<int> result = s.twoSum(nums, target);
+    printf("%d %d", result[0], result[1]);
+    return 0;
+}

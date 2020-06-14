@@ -6,6 +6,7 @@ time: 16 ms
 
 memory: 8.6 mb
 
+``` C++
     class Solution {
     public:
         int romanToInt(string s) {
@@ -97,7 +98,7 @@ memory: 8.6 mb
             return 0;
         }
     };
-
+```
 
 思路：其实是用了极其繁琐的方法...但是说起来我还是用了递归不是？用了递归居然也只花了这么点内存，真是奇怪。
 1. 用迭代器从string数组最左边开始遍历，同时在I、X和C的时候检查右边的字母以保证本层递归要sum的值。其中sum用引用传递以保证值的继承，string用引用传递以节省空间。
@@ -109,10 +110,11 @@ memory: 8.6 mb
 
 emmmmm...别人的算法总是比我好......(管他呢我刚学)
 
+``` C++
     class Solution {
     public:
         int romanToInt(string s) {
-            int result=0;//存放结果
+            int result = 0;//存放结果
             map<char,int> roman;//建立罗马表
             //插入对应关系
             roman.insert(map<char,int>::value_type('I',1));
@@ -135,6 +137,7 @@ emmmmm...别人的算法总是比我好......(管他呢我刚学)
             return result;
         }
     };
+```
 
 思路：
 1. 将罗马数字的字母和阿拉伯数字的对应关系放入哈希表

@@ -8,6 +8,7 @@ time: 40 ms
 
 memory: 8.2 mb
 
+``` C++
     class Solution {
     public:
         bool isPalindrome(int x) {
@@ -20,6 +21,7 @@ memory: 8.2 mb
             return true;    
         }
     };
+```
 
 思路：
 1. 把数值转换成字符串，然后简单地从左到中间遍历查看是否有不同的数字。这算是目前最简单的一道题，我的算法也是最容易想到的了吧。
@@ -34,6 +36,7 @@ memory: 8.2 mb
 
 这种算法即反转一半数值，然后将反转的结果和剩下的相比较。这是我一开始的代码：
 
+``` C++
     class Solution {
     public:
         bool isPalindrome(int x) {
@@ -49,6 +52,7 @@ memory: 8.2 mb
             return x == y || x/10 == y;
         }
     };
+```
 
 然而遇到了问题，超出了时间限制。原因是有一个测试用例居然是0，这下就会进入死循环......
 
@@ -60,6 +64,7 @@ memory: 8.2 mb
 
 然后见招拆招...加了一句检查是否是个位数...
 
+``` C++
     class Solution {
     public:
         bool isPalindrome(int x) {
@@ -78,7 +83,40 @@ memory: 8.2 mb
             return x == y || x/10 == y;
         }
     };
+```
 
 还是不对...如果测试用例是1001的话。
 
 哎，明天再看看吧
+
+
+## my sol 3     20/6/14     10 min
+
+8 ms    94.79%
+
+6 mb    100%
+
+``` C++
+bool isPalindrome(int x) {
+    if (x < 0) {
+        return false;
+    }
+    if (x / 10 == 0) {
+        return true;
+    }
+    if (x % 10 == 0) {
+        // 应对类似1210的数
+        return false;
+    }
+    int y = 0, pop;
+    while (x / 10 >= y * 10) { 
+        //小于的话意味着数值反转处理到了一半，非回文数也成立
+        pop = x % 10;
+        x /= 10;
+        y = y * 10 + pop;  //这种算法太妙了，一定要好好领会
+    }
+    return x == y || x/10 == y;
+}
+```
+
+时隔了将近一年啊...总算把这个坑给填了

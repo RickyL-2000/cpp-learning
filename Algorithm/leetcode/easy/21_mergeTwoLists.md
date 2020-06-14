@@ -4,7 +4,7 @@
 
 **FAIL**😭
 
-```
+``` C++
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
     struct ListNode *ans, 
                     *pre,   // pre 是 l1 中指向 指针l1 之前的元素的指针
@@ -55,7 +55,7 @@ time: 8 ms  68.45%
 
 memory: 7.2 mb  94.23%
 
-```
+``` C++
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
     struct ListNode *ans, 
                     *pre,   // pre 是 l1 中指向 指针l1 之前的元素的指针

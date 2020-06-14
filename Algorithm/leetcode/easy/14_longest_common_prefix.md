@@ -6,6 +6,7 @@ time: 12 ms
 
 memory: 8.9 mb
 
+``` C++
     string longestCommonPrefix(vector<string>& strs) {
         if (strs.begin() == strs.end()) {
             return "";
@@ -36,3 +37,4 @@ memory: 8.9 mb
         ans.erase(ans.begin() + j, ans.end());
         return ans;
     }
+```
