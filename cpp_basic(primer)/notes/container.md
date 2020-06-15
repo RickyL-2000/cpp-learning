@@ -620,6 +620,7 @@ pair是定义在头文件utility中的标准库类型
 
 example: 用map实现单词计数程序
 
+``` C++
     map<string, size_t> word_count;
     string word;
     while (cin >> word)
@@ -627,9 +628,11 @@ example: 用map实现单词计数程序
     for (const auto &w : word_count)
         cout << w.first << " occurs " << w.second
             << (w.second > 1) ? " times" : " time" << endl;
+```
 
 example: 用set实现忽略特定单词程序
 
+``` C++
     map<string, size_t> word_count;
     set<string> exclude = {"The", "But","And","Or","An","A",
                             "the","but","and","or","an","a"};
@@ -638,6 +641,7 @@ example: 用set实现忽略特定单词程序
         if (exclude.find(word) == exclude.end())
             ++word_count[word];
     }
+```
 
 find()函数返回一个迭代器。如果给定关键字在set中，迭代器指向该关键字。否则，find()返回尾后迭代器。
 
