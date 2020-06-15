@@ -23,7 +23,9 @@
         "map": "cpp",
         "ratio": "cpp",
         "cstdint": "cpp",
-        "streambuf": "cpp"
+        "streambuf": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp"
     },
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c99",
