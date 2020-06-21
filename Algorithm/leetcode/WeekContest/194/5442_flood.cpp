@@ -24,7 +24,7 @@ public:
                 mp[ans_idx]++;
                 ans.push_back(-1);
                 rains_idx++;
-                ans_idx
+                // TODO
             }
         }
     }
