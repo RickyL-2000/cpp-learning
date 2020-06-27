@@ -11,8 +11,8 @@ int tree1[26][2];
 int tree2[26][2];
 
 int main() {
-    fill(tree1[0], tree1[0] + 26 * 2, -1);
-    fill(tree2[0], tree2[0] + 26 * 2, -1);
+    fill(tree1[0], tree1[0] + 26 * 2, -2);
+    fill(tree2[0], tree2[0] + 26 * 2, -2);
     int n1, n2;
     char val, ch_left, ch_right;
     int left, right;
