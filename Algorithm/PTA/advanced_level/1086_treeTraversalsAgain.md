@@ -4,7 +4,7 @@
 
 不是很会做...
 
-```
+``` C++
 #include <iostream>
 using namespace std;
 
