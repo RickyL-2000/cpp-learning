@@ -165,3 +165,5 @@ public class Solution {
     }
 }
 ```
+
+这个正向拟象遍历的算法，真的是学到了
