@@ -25,27 +25,28 @@ public:
         }
         // priority_queue<pair<int, double>, vector<pair<int, double>>, cmp> pq;
         // for (auto e: dist) pq.push(e);
-        dist[start].second = 1.0;
+        dist[start].second = -1.0;
         for (int i = 0; i < n; i++) {
 
-            int u = 0, max = 0;
+            int u = -1, minn = 10;
             for (int j = 0; j < n; j++) {
-                if (dist[j].second > max && visited[j] == false) {
+                if (dist[j].second < minn && visited[j] == false) {
                     u = j;
-                    max = dist[j].second;
+                    minn = dist[j].second;
                 }
             }
+            if (u == -1) break;
             visited[u] = true;
 
             for (int j = 0; j < n; j++) {
                 if (edge_list.find({u, j}) != edge_list.end() && visited[j] == false) {
-                    if (dist[j].second < dist[u].second * succProb[edge_list[{u, j}]]) {
-                        dist[j].second = dist[u].second * succProb[edge_list[{u, j}]];
+                    if (dist[j].second > -(abs(dist[u].second) * abs(succProb[edge_list[{u, j}]]))) {
+                        dist[j].second = -(abs(dist[u].second) * abs(succProb[edge_list[{u, j}]]));
                     }
                 }
             }
         }
-        return dist[end].second;
+        return -dist[end].second;
     }
 };
 
