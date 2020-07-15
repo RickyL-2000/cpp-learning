@@ -28,3 +28,10 @@
 ### Disjoint Set
 
 * pp13 - 05-树8 File Transfer (25point(s))
+
+### Graph
+
+* pp15 - 06-图1 列出连通集 (25point(s))
+* pp16 - 06-图2 Saving James Bond - Easy Version (25point(s))
+  * Dijkstra算法
+  * 用make_heap将vector变成priority queue
