@@ -35,3 +35,4 @@
 * pp16 - 06-图2 Saving James Bond - Easy Version (25point(s))
   * Dijkstra算法
   * 用make_heap将vector变成priority queue
+* pp17 - 06-图3 六度空间 (30point(s))
