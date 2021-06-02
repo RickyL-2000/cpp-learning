@@ -6,7 +6,7 @@ int main()
     std::cout << "Enter two integers a, b that a > b: "
               << std::endl;
     std::cin >> a >> b; 
-    for (a; a >= b; --a)
+    for (; a >= b; --a)
         std::cout << a << std::endl;
     return 0;
 }

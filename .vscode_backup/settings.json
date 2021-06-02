@@ -28,7 +28,8 @@
         "unordered_set": "cpp",
         "stack": "cpp",
         "deque": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "editor.acceptSuggestionOnEnter": "off" // 我个人的习惯，按回车时一定是真正的换行，只有tab才会接受Intellisense
     },
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c99",
